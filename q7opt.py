@@ -2,10 +2,14 @@ def solve_optimized():
     matrix = []
     while True:
         line = input()
-        if not line:  # Stop when an empty line is entered, signaling end of input
+        if line.strip() == "-":  # Check for the "-" terminator
             break
-        row = list(map(int, line.split()))
-        matrix.append(row)
+        try:
+            row = list(map(int, line.split()))
+            matrix.append(row)
+        except ValueError:
+            print("Invalid input format.  Please enter numbers only, or '-' to end.")
+            return  # Or handle the error differently (e.g., skip the line, exit)
 
     rows = len(matrix)
     cols = len(matrix[0]) if rows > 0 else 0

@@ -31,3 +31,5 @@ def q2():
             return possible_values[i] + 1
             
     return possible_values[-1] + 1
+
+q2()

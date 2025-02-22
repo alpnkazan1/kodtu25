@@ -4,7 +4,7 @@ from memory_profiler import profile
     
 @profile
 def q6():
-  a, c = map(int, input().split())
+  a, c = 9239, 657
 
   for b in range(a, 10001):
     s = ""

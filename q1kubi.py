@@ -1,17 +1,7 @@
 
-import sys
 from collections import deque
 
 def solve(pawn_col, pawn_row, knight_col, knight_row):
-    """
-    Finds the minimum number of moves for a knight to capture a pawn.
-
-    Args:
-        pawn_col (int): Pawn's column (1-8).
-        pawn_row (int): Pawn's row (1-8).
-        knight_col (int): Knight's column (1-8).
-        knight_row (int): Knight's row (1-8).
-    """
 
     if knight_col == pawn_col and knight_row == pawn_row:
         print(0)
@@ -98,15 +88,7 @@ def isedgecase(pawnHor, pawnVer, knightHor, knightVer):
     return 0
 
 def harf_to_sayi(harf):
-    """
-    Harfi sayıya dönüştürür.
 
-    Args:
-        harf (str): Dönüştürülecek harf (a'dan h'ye).
-
-    Returns:
-        int: Dönüştürülmüş sayı (1'den 8'e). Eğer harf geçersizse, None döndürür.
-    """
     harf_sozlugu = {
         "a": 1,
         "b": 2,
@@ -117,7 +99,7 @@ def harf_to_sayi(harf):
         "g": 7,
         "h": 8
     }
-    return harf_sozlugu.get(harf)  # Eğer harf bulunamazsa None döndürür
+    return harf_sozlugu.get(harf)
 
 
 knighPos = input()
@@ -165,5 +147,5 @@ if(end == 0):
                             print(4)
                             end = 1
 
-        if end == 0: # Move this to be aligned with "test = isin3..."
+        if end == 0:
             test3 = solve(pawnHor, pawnVer, knightHor, knightVer)

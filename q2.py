@@ -32,4 +32,4 @@ def q2():
             
     return possible_values[-1] + 1
 
-q2()
+print(q2())

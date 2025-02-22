@@ -1,11 +1,11 @@
 def solve_optimized():
     matrix = []
     while True:
-        try:
-            row = list(map(int, input().split()))
-            matrix.append(row)
-        except:
+        line = input()
+        if not line:  # Stop when an empty line is entered, signaling end of input
             break
+        row = list(map(int, line.split()))
+        matrix.append(row)
 
     rows = len(matrix)
     cols = len(matrix[0]) if rows > 0 else 0
@@ -14,12 +14,14 @@ def solve_optimized():
     best_rect1 = None
     best_rect2 = None
 
+    # Precompute prefix sum for efficient rectangle sum calculation
     prefix_sum = [[0] * (cols + 1) for _ in range(rows + 1)]
     for i in range(1, rows + 1):
         for j in range(1, cols + 1):
             prefix_sum[i][j] = prefix_sum[i - 1][j] + prefix_sum[i][j - 1] - prefix_sum[i - 1][j - 1] + matrix[i - 1][j - 1]
 
     def rect_sum(r1, c1, r2, c2):
+        """Calculates the sum of elements within a rectangle using prefix sum."""
         return prefix_sum[r2 + 1][c2 + 1] - prefix_sum[r1][c2 + 1] - prefix_sum[r2 + 1][c1] + prefix_sum[r1][c1]
 
     for r1_start in range(rows):
@@ -28,6 +30,8 @@ def solve_optimized():
                 for c1_end in range(c1_start, cols):
 
                     area1 = (r1_end - r1_start + 1) * (c1_end - c1_start + 1)
+                    # Check if rectangle 1 is valid using precomputed prefix sum. If the sum equals the area,
+                    # and area is not zero, then all elements are 1
                     if rect_sum(r1_start, c1_start, r1_end, c1_end) != area1 or area1 == 0:
                         continue
 
@@ -43,6 +47,7 @@ def solve_optimized():
                                     if area1 != area2:
                                         continue
 
+                                    # Check for intersection efficiently
                                     if (r1_start <= r2_end and r1_end >= r2_start and
                                             c1_start <= c2_end and c1_end >= c2_start):
                                         continue
